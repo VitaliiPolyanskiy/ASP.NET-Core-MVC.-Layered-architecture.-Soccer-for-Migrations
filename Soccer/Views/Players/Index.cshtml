@@ -1,42 +1,75 @@
-﻿@model IEnumerable<Soccer.BLL.DTO.PlayerDTO>
+﻿@model Soccer.Models.IndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Каталог игроков</h2>
 
 <p>
     <a asp-action="Create">Добавить игрока</a>
 </p>
-<table class="table-condensed" style="width:100%">
-    <tr>
-        <th>Имя игрока</th>
-        <th>Возраст</th>
-        <th>Позиция на поле</th>
-        <th>Клуб</th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Team)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Просмотреть</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-        </td>
-    </tr>
-}
+<form method="get">
+    <div>
+        <label>Позиция игрока: </label>
+        <input name="position" value="@Model.FilterViewModel.SelectedPosition" />
+        <label>Клуб: </label>
+        <select name="team" asp-items="Model.FilterViewModel.Teams"></select>
+        <input type="submit" value="Filter" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+                   asp-route-position="@(Model.FilterViewModel.SelectedPosition)"
+                   asp-route-team="@(Model.FilterViewModel.SelectedTeam)">Имя игрока</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.AgeSort)"
+                   asp-route-position="@(Model.FilterViewModel.SelectedPosition)"
+                   asp-route-team="@(Model.FilterViewModel.SelectedTeam)">Возраст игрока</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PositionSort)"
+                   asp-route-position="@(Model.FilterViewModel.SelectedPosition)"
+                   asp-route-team="@(Model.FilterViewModel.SelectedTeam)">Позиция на поле</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.TeamSort)"
+                   asp-route-position="@(Model.FilterViewModel.SelectedPosition)"
+                   asp-route-team="@(Model.FilterViewModel.SelectedTeam)">Клуб</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Players)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @(DateTime.Now.Year - item.BirthYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Просмотреть</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-position="@(Model.FilterViewModel.SelectedPosition)"
+           page-url-team="@(Model.FilterViewModel.SelectedTeam)"
+           page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>

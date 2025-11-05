@@ -22,7 +22,7 @@ namespace Soccer.BLL.Services
             {
                 Id = playerDto.Id,
                 Name = playerDto.Name,
-                Age = playerDto.Age,
+                BirthYear = playerDto.BirthYear,
                 Position = playerDto.Position,
                 TeamId = playerDto.TeamId
             };
@@ -36,7 +36,7 @@ namespace Soccer.BLL.Services
             {
                 Id = playerDto.Id,
                 Name = playerDto.Name,
-                Age = playerDto.Age,
+                BirthYear = playerDto.BirthYear,
                 Position = playerDto.Position,
                 TeamId = playerDto.TeamId
             };
@@ -54,12 +54,12 @@ namespace Soccer.BLL.Services
         {
             var player = await Database.Players.Get(id);
             if (player == null)
-                throw new ValidationException("Wrong player!", "");
+                throw new ValidationException("Отсутствуют данные!", "");
             return new PlayerDTO
             {
                 Id = player.Id,
                 Name = player.Name,
-                Age = player.Age,
+                BirthYear = player.BirthYear,
                 Position = player.Position,
                 TeamId = player.TeamId,
                 Team = player.Team?.Name

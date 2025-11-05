@@ -6,7 +6,7 @@ namespace Soccer.DAL.Entities
 
         public string? Name { get; set; }
 
-        public int Age { get; set; }
+        public int BirthYear { get; set; }
 
         public string? Position { get; set; }
 

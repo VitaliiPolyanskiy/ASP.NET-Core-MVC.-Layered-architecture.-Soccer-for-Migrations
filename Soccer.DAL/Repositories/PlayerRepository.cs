@@ -29,7 +29,7 @@ namespace Soccer.DAL.Repositories
 
         public async Task<Player> Get(string name)
         {         
-            var players = await db.Players.Include(o => o.Team).Where(a => a.Name == name).ToListAsync();
+            var players = await db.Players.Where(a => a.Name == name).ToListAsync();
             Player? player = players?.FirstOrDefault();
             return player!;
         }

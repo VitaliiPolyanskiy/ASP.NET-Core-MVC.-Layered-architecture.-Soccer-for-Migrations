@@ -9,9 +9,11 @@ namespace Soccer.BLL.DTO
     {
         public int Id { get; set; }
 
+        [Display(Name = "Название клуба")]
         [Required(ErrorMessage = "Поле должно быть установлено.")]
         public string? Name { get; set; }
 
+        [Display(Name = "Тренер клуба")]
         [Required(ErrorMessage = "Поле должно быть установлено.")]
         public string? Coach { get; set; }
     }

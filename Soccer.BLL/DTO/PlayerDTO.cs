@@ -9,17 +9,21 @@ namespace Soccer.BLL.DTO
     {
         public int Id { get; set; }
 
+        [Display(Name = "Имя игрока")]
         [Required(ErrorMessage = "Поле должно быть установлено.")]
         public string? Name { get; set; }
 
+        [Display(Name = "Год рождения игрока")]
         [Required(ErrorMessage = "Поле должно быть установлено.")]
-        public int Age { get; set; }
+        public int BirthYear { get; set; }
 
+        [Display(Name = "Позиция на поле")]
         [Required(ErrorMessage = "Поле должно быть установлено.")]
         public string? Position { get; set; }
 
         public int? TeamId { get; set; }
 
+        [Display(Name = "Название клуба")]
         public string? Team { get; set; }
     }
 }

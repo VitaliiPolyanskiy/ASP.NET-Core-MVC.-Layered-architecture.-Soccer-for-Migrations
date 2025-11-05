@@ -12,12 +12,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                @Html.Label("Название клуба:")
+                <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.Label("Тренер:")
+                <label asp-for="Coach" class="control-label"></label>
                 <input asp-for="Coach" class="form-control" />
                 <span asp-validation-for="Coach" class="text-danger"></span>
             </div>

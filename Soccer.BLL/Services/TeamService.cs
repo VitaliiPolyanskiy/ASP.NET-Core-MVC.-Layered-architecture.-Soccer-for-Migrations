@@ -50,7 +50,7 @@ namespace Soccer.BLL.Services
         {
             var team = await Database.Teams.Get(id);
             if (team == null)
-                throw new ValidationException("Wrong team!", "");
+                throw new ValidationException("Отсутствуют данные!", "");
             return new TeamDTO
             {
                 Id = team.Id,
